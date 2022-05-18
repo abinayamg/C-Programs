@@ -1,0 +1,1107 @@
+########################### Rotation #######################
+INPUT  1234567
+OUTPUT 3456712
+===>1
+
+#include <stdio.h>
+
+/* Function to left Rotate arr[] of size n by 1*/
+void leftRotatebyOne(int arr[], int n);
+
+/*Function to left rotate arr[] of size n by d*/
+void leftRotate(int arr[], int d, int n)
+{
+	int i;
+	for (i = 0; i < d; i++)
+		leftRotatebyOne(arr, n);
+}
+
+void leftRotatebyOne(int arr[], int n)
+{
+	int temp = arr[0], i;
+	for (i = 0; i < n - 1; i++)
+		arr[i] = arr[i + 1];
+	arr[n-1] = temp;
+}
+
+/* utility function to print an array */
+void printArray(int arr[], int n)
+{
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%d ", arr[i]);
+}
+
+/* Driver program to test above functions */
+int main()
+{
+	int arr[] = { 1, 2, 3, 4, 5, 6, 7 };
+	leftRotate(arr, 2, 7);
+	printArray(arr, 7);
+	return 0;
+}===>2
+######################################## Rotate #########################################################
+#include <stdio.h>
+
+/* Function to left Rotate arr[] of size n by 1*/
+
+/* Driver program to test above functions */
+int main()
+{
+  int arr[11] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+   int i, N, len, j;
+   N=3; // three position
+   len=10;
+   int temp=0;
+   for (i = 0; i < N; i++) {
+      int x = arr[0];
+      for (j = 0; j < len; j++) {
+         temp=arr[j];
+         arr[j] = arr[j + 1];
+         arr[j+1]=temp;
+      }
+      arr[len - 1] = x;
+   }
+   for (i = 0; i < len; i++) {
+      printf("%d\t ", arr[i]);
+   }
+   return 0;
+}
+===>3
+#################################################### Rearange Positive Negative in Array #########################################
+INPUT  -12, 11, -13, -5, 6, -7, 5, -3, -6
+Output -12 -13 -5 -7 -3 -6 11 6 5 
+// C++ program to Rearrange positive and negative
+// numbers in a array
+#include <stdio.h>
+
+// A utility function to print an array of size n
+void printArray(int arr[], int n)
+{
+	for (int i = 0; i < n; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
+// Function to Rearrange positive and negative
+// numbers in a array
+void RearrangePosNeg(int arr[], int n)
+{
+	int key, j;
+	for (int i = 1; i < n; i++) {
+		key = arr[i];
+
+		// if current element is positive
+		// do nothing
+		if (key > 0)
+			continue;
+
+		/* if current element is negative,
+		shift positive elements of arr[0..i-1],
+		to one position to their right */
+		j = i - 1;
+		while (j >= 0 && arr[j] > 0) {
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+
+		// Put negative element at its right position
+		arr[j + 1] = key;
+	}
+}
+
+/* Driver program to test above functions */
+int main()
+{
+	int arr[] = { -12, 11, -13, -5, 6, -7, 5, -3, -6 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+
+	RearrangePosNeg(arr, n);
+	printArray(arr, n);
+
+	return 0;
+}
+===>4
+#####################################################    flipped convert A to B ################################
+Input : a = 10, b = 20
+Output : 4
+Binary representation of a is 00001010
+Binary representation of b is 00010100
+We need to flip highlighted four bits in a
+to make it b.
+
+
+// Count number of bits to be flipped
+// to convert A into B
+#include <stdio.h>
+
+
+// Function that count set bits
+int countSetBits(int n)
+{
+	int count = 0;
+	while (n > 0)
+	{
+		count++;
+		n &= (n-1);
+	}
+	return count;
+}
+
+// Function that return count of
+// flipped number
+int FlippedCount(int a, int b)
+{
+	// Return count of set bits in
+	// a XOR b
+	return countSetBits(a^b);
+}
+
+// Driver code
+int main()
+{
+	int a = 7;
+	int b = 20;
+	printf("%d",FlippedCount(a, b));
+	return 0;
+}
+===>5
+######################################################################################## PRINT ALL Distinct Character in the String ###########
+INPUT ==> GOOD
+OUTPUT ==> GD
+
+
+#include <stdio.h>
+int main()
+{
+	char str[14] = "good";
+	int size = sizeof(str)/sizeof(str[0]);
+
+	for (int i = 0; i < size; i++)
+	{
+		int flag = 0;
+		for (int j = 0; j < size; j++)
+		{
+			// checking if two characters are equal
+			if (str[i] == str[j] && i != j)
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0)
+			printf("'%c'",str[i]);
+	}
+
+	return 0;
+}
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Remove duplicate string **************************
+INPUT ==> abinaya
+OUTPUT ==> biny
+#include<stdio.h>
+int main(){
+ char str[]="abinaya";
+ int size = sizeof(str)/sizeof(str[0]);
+int i,j,n;
+for(int i=0;i<size;i++)
+{
+    n=0;
+for(int j=0;j<size;j++)
+{
+if(str[i]== str[j])
+{
+if(i != j)
+n=1;
+}
+}
+if(n==0)
+printf("%c",str[i]);
+}
+  return 0;
+}
+===>6
+#####################################   Little ENdian Big Endian               ####################################################################
+
+
+#include <stdio.h>
+int main()
+{
+unsigned int i = 1;
+char *c = (char*)&i;
+if (*c)
+	printf("Little endian");
+else
+	printf("Big endian");
+getchar();
+return 0;
+}
+===>7
+##################################################### swap the integer without temp variable ###################################################
+
+#include <stdio.h>
+int main()
+{
+	int x = 10, y = 5;
+
+	// Code to swap 'x' and 'y'
+	x = x + y; // x now becomes 15
+	y = x - y; // y becomes 10
+	x = x - y; // x becomes 5
+
+	printf("After Swapping: x = %d, y = %d", x, y);
+
+	return 0;
+}
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ // C Program to swap two numbers
+// without using temporary variable
+#include <stdio.h>
+int main()
+{
+	int x = 10, y = 5;
+
+	// Code to swap 'x' and 'y'
+	x = x * y; // x now becomes 50
+	y = x / y; // y becomes 10
+	x = x / y; // x becomes 5
+
+	printf("After Swapping: x = %d, y = %d", x, y);
+
+	return 0;
+}
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// C code to swap using XOR
+#include <stdio.h>
+int main()
+{
+	int x = 10, y = 5;
+
+	// Code to swap 'x' (1010) and 'y' (0101)
+	x = x ^ y; // x now becomes 15 (1111)
+	y = x ^ y; // y becomes 10 (1010)
+	x = x ^ y; // x becomes 5 (0101)
+
+	printf("After Swapping: x = %d, y = %d", x, y);
+
+	return 0;
+}
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include <stdio.h>
+void swap(int* xp, int* yp)
+{
+	*xp = *xp ^ *yp;
+	*yp = *xp ^ *yp;
+	*xp = *xp ^ *yp;
+}
+
+int main()
+{
+	int x = 10;
+	swap(&x, &x);
+	printf("After swap(&x, &x): x = %d", x);
+	return 0;
+}
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include <stdio.h>
+void swap(int* xp, int* yp)
+{
+	if (xp == yp) // Check if the two addresses are same
+		return;
+	*xp = *xp + *yp;
+	*yp = *xp - *yp;
+	*xp = *xp - *yp;
+}
+int main()
+{
+	int x = 10;
+	swap(&x, &x);
+	printf("After swap(&x, &x): x = %d", x);
+	return 0;
+}
+===>8
+#############################################################  Reverse the string without Reverse ############################
+INPUT ==> Hello
+OUTPUT ==> olleH
+
+#include <stdio.h>
+#include <string.h>
+void main(){
+   char string[20],temp;
+   int i,length,j,n;
+   printf("Enter String : ");
+   scanf("%s",string);
+   for(j=0;j<=string[j];j++);
+   n=j;
+
+   length=n-1;
+   for(i=0;i<n/2;i++){
+          printf("%d\n",n/2);
+      temp=string[i];
+      string[i]=string[length];
+      string[length--]=temp;
+   }
+   printf("\nReverse string :%s",string);
+   gets();
+}
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+INPUT ==> Hello
+OUTPUT ==> olleH
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+  	char Str[100], RevStr[100];
+  	int i, j, len;
+  	printf("\n Please Enter any String :  ");
+  	gets(Str); 	
+  	j = 0;
+  	len = strlen(Str);
+  	for (i = len - 1; i >= 0; i--)
+  	{
+  		RevStr[j++] = Str[i];
+  	}
+  	RevStr[i] = '\0';
+  	printf("\n String after Reversing = %s", RevStr); 	
+  	return 0;
+}
+===>9
+############################################################# Toggle in the string ############
+INPUT ==> abcDeImmNO
+OUTPUT ==> ABCdEiMMno
+int main()
+{
+char str[11]="abcDeImmNO"; //ABCdEiMMno
+toggle(str);
+printf("Toggled String %s",str);
+return 0;
+}
+
+void toggle(char *str)
+{
+while(*str)
+{
+if(*str >= 'a' && *str <='z')
+*str = *str - 32;
+else if(*str >= 'A' && *str <= 'Z')
+*str= *str +32;
+str++;
+}
+} 
+===>10
+################################ bitwise shift swap ########################
+INPUT=> 0x1122AABB
+OUTPUT=> 22bb11aa
+
+#include <stdio.h>
+
+int main()
+{
+    printf("Hello World\n");
+    int a=0x1122AABB;
+
+
+
+int x= ((a & 0xff000000)>>16 | (a & 0x00ff0000) << 8 | (a & 0x0000ff00) >> 8 | (a & 0x00000000ff) << 16 );
+printf("%x\n",x);
+
+    return 0;
+}
+ ===> 11
+ ############################# Reverse the Words in the string ########################################
+ INPUT India is great
+ OUTPUT great is INDIA
+#include <stdio.h>
+#include<string.h>
+
+int main() {
+    // Write C code here
+    char str[20] ="India is great";
+    char reverse[20];
+    int len,i,start,wordstart,wordend;
+    len=strlen(str);
+    start=0;
+    wordstart = len -1;
+    wordend = len -1;
+    while(wordstart > 0)
+    {
+        if(str[wordstart] == ' ')
+        {
+            i=wordstart+1;
+            while(i<= wordend)
+            {
+                reverse[start]=str[i];
+                i++;
+                start++;
+            }
+                reverse[start++]=' ';
+                wordend=wordstart-1;
+        }
+            wordstart--;
+    }
+        for(i=0;i<=wordend;i++)
+        {
+            reverse[start]=str[i];
+            start++;
+        }
+        reverse[start]='\0';
+        printf("Original string \n%s\n",str);
+        printf("Reverse string \n%s",reverse);
+    
+    
+  
+    
+    return 0;
+}
+
+##################################### Duplicate number ##########################################
+#include <stdio.h>
+void findDuplicates(int arr[], int n)
+{
+// create another array of similar size
+int temp[n];
+int count = 0;
+
+// traverse original array
+for(int i=0; i<n; i++) {
+
+int element = arr[i];
+int flag = 0;
+
+// check current element is already
+// checked or not
+for(int j=0; j<count; j++) {
+if(temp[j] == element) {
+flag = 1;
+break;
+}
+}
+
+// if already exist then don't check
+if(flag) {
+continue;
+}
+
+// check occurrence of element
+for(int j=i+1; j<n; j++) {
+if(arr[j] == element) {
+temp[count++] = element;
+// found, therefore break
+break;
+}
+}
+}
+
+// display duplicate elements
+printf("Repeated elements are: ");
+for (int i = 0; i < count; i++) {
+printf("%d ",temp[i]);
+}
+}
+
+
+
+// main function
+int main()
+{
+// original array
+int arr[] = {50, 20, 10, 40, 20, 10, 10, 60, 30, 70,50,50};
+
+
+
+// find array size
+int size = sizeof(arr)/sizeof(arr[0]);
+
+// find duplicates
+findDuplicates(arr, size);
+
+return 0;
+}
+################################################ SIZE OF WITHOUT #################################
+SIZE OF WITHOUT===>
+
+#define sizeof_var(a) (size_t)(&a+1)-(size_t)(&a)
+int main()
+{
+int a=1;
+printf("%d",sizeof_var(a));
+return 0;
+}
+
+@@@@@@@@@@ METHOD 2 SIZE OF @@@@@@@
+#include<stdio.h>
+void main()
+{
+    int a,*ptr,b,c;
+    ptr=&a;
+    b=ptr;
+    c=++ptr;
+    printf("Size of Integer=%d\n",c-b);
+}
+@@@@@@ METHOD 3 SIZE OF @@@@@@@@@
+int main()
+{
+int a=1;
+int *p=&a;
+int q=++p;
+printf("%d",q-p);
+return 0;
+}
+@@@@@@ Array SIZE of @@@@@@@@ 
+int size = sizeof(arr)/sizeof(arr[0]);
+@@@@@@ Array SIZE of @@@@@@@
+int  arr[] = {1, 2, 3, 4, 5, 6};
+int size = *(&arr + 1) - arr;;
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ structure without sizeof @@@@@@@@@@@@@@@@@@@@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct
+{
+    char Name[12];
+    int Age;
+    float Weight;
+    int RollNumber;
+} studentinfo;
+int main()
+{
+    studentinfo *info  = NULL;
+    int SizeofStructure = 0;
+    SizeofStructure = (char*)(info + 1) - (char*)(info);
+    printf("Size of structure  =  %d\n\n",SizeofStructure);
+    return 0;
+}
+
+@@@@@@@@@@@@@@@@@@@@@@@@@ structure without sizeof ###############
+OUTPUT ==> Size of the structure student:  108
+#include<stdio.h>
+
+struct student{
+    int roll;
+    char name[100];
+    float marks;
+};
+
+int main(){
+
+  struct student *ptr = 0;
+
+  ptr++;
+  printf("Size of the structure student:  %d",ptr);
+
+  return 0;
+}
+
+####################################### SET CLEAR TOGGLE ###############################################
+SET BIT ==> (n | (1 << (k -1))));
+TOGGLE  ==>  (n ^ (1 << (k -1)));
+CLEAR   ==> (n & (~(1 << (k-1))));
+##################################################### linked list Append ############################################
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include<stdlib.h>
+struct Node
+{
+int data;
+struct Node *next;
+};
+void append(struct Node** head_ref, int new_data)
+{
+struct Node* new_node =(struct Node*) malloc(sizeof(struct Node));
+struct Node *last= *head_ref;
+new_node->data=new_data;
+new_node->next=NULL;
+if(*head_ref == NULL)
+{
+*head_ref=new_node;
+//printf("data1 = %d\n",new_node->data);
+return;
+}
+while(last->next !=NULL)
+last=last->next;
+last->next=new_node;
+printf("data = %d\n",new_node->data);
+return;
+}
+
+int main()
+{
+    struct Node* head = NULL;
+    append(&head,2);
+    append(&head,3);
+    while(head != NULL)
+    {
+        printf(" data in main=%d\n",head->data);
+        head=head->next;
+    }
+    
+    
+    //insert(&head,3,2);
+    return 0;
+}
+
+################################################################ Insert to particular position ###################################3
+// A simple C program to introduce
+// a linked list
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+	int data;
+	struct Node* next;
+};
+void append(struct Node** head_ref, int new_data, int pos)
+{
+    /* 1. allocate node */
+    int count=0;
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+ 
+    struct Node *last = *head_ref;  /* used in step 5*/
+    struct Node *temp;
+ 
+    /* 2. put in the data  */
+    new_node->data  = new_data;
+ 
+    /* 3. This new node is going to be the last node, so make next of
+          it as NULL*/
+    new_node->next = NULL;
+ 
+    /* 4. If the Linked List is empty, then make the new node as head */
+    if (*head_ref == NULL)
+    {
+        printf("inside if loop\n");
+       *head_ref = new_node;
+       
+       return;
+    }
+ printf("outside if loop\n");
+    /* 5. Else traverse till the last node */
+    while (last->next != NULL)
+    {
+        printf("inside While loop\n");
+        last = last->next;
+        count++;
+        printf("count ==> %d\n",count);
+         printf("last->next ==> %d\n",last->next);
+        if(count==pos)
+        {
+         printf("last->next break ==> %d\n",last->next);
+         temp=last->next;
+        break;
+        }
+        
+        
+    }
+ printf("outside While loop\n");
+    /* 6. Change the next of last node */
+    last->next = new_node;
+    new_node->next=temp;
+    return;
+}
+ 
+// Program to create a simple linked
+// list with 3 nodes
+int main()
+{
+	struct Node* head  = NULL;
+	struct Node* second = NULL;
+	struct Node* third = NULL;
+	head = (struct Node*)malloc(sizeof(struct Node));
+	second = (struct Node*)malloc(sizeof(struct Node));
+	third = (struct Node*)malloc(sizeof(struct Node));
+	head->data = 1;
+	head->next = second;
+	
+	second->data=4;
+	second->next=third;
+	third->data=7;
+	third->next=NULL;
+	printf("next third= %d\n",second->next);
+	//third = (struct Node*)malloc(sizeof(struct Node));
+     //append(&head, 6,0);
+     append(&head, 5,1);
+     while(head != NULL)
+     {
+         printf("data = %d\n",head->data);
+         printf("next = %d\n",head->next);
+         head=head->next;
+         
+     }
+     
+	return 0;
+}
+#############################################################  insert append delete ##############################################
+// A simple C program to introduce
+// a linked list
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+	int data;
+	struct Node* next;
+};
+void deletes(struct Node** head_ref, int pos)
+{
+    printf("Delete pat innnnnnnnnnnnn\n");
+    struct Node *temp=NULL;
+    struct Node *last=*head_ref;
+    int count =0;
+     while (last->next != NULL)
+    {
+                printf("last->next first ==> %d\n",last->next);
+        
+        count++;
+        int loc = pos-1;
+        printf("count ==> %d\n",loc);
+        if(count==loc)
+        {
+         printf("last->next break ==> %d\n",last->next);
+         temp=last->next;
+         printf("skip break ==> %d\n",temp->next);
+        break;
+        }
+        last = last->next;
+     
+      //last->next = new_node;
+    //new_node->next=temp;
+    
+    }
+     last->next = temp->next;
+     return; 
+}
+void append(struct Node** head_ref, int new_data, int pos)
+{
+    int count=0;
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+    struct Node *last = *head_ref;  /* used in step 5*/
+    struct Node *temp;
+    new_node->data  = new_data;
+    new_node->next = NULL;
+    if (*head_ref == NULL)
+    {
+        printf("inside if loop\n");
+       *head_ref = new_node;
+       
+       return;
+    }
+ printf("outside if loop\n");
+    while (last->next != NULL)
+    {
+        printf("inside While loop\n");
+        last = last->next;
+        count++;
+        //printf("count ==> %d\n",count);
+         //printf("last->next ==> %d\n",last->next);
+        if(count==pos)
+        {
+         //printf("last->next break ==> %d\n",last->next);
+         temp=last->next;
+        break;
+        }
+        
+        
+    }
+ printf("outside While loop\n");
+    last->next = new_node;
+    new_node->next=temp;
+    return;
+}
+
+int main()
+{
+	struct Node* head  = NULL;
+	struct Node* second = NULL;
+	struct Node* third = NULL;
+	head = (struct Node*)malloc(sizeof(struct Node));
+	second = (struct Node*)malloc(sizeof(struct Node));
+	third = (struct Node*)malloc(sizeof(struct Node));
+	head->data = 1;
+	head->next = second;
+	second->data=4;
+	second->next=third;
+	third->data=7;
+	third->next=NULL;
+     append(&head, 5,1);
+     deletes(&head, 2);
+     while(head != NULL)
+     {
+         printf("data = %d\n",head->data);
+        printf("next = %d\n",head->next);
+         //printf("next->next = %d\n",head->next->next);
+         head=head->next;
+         
+     }
+     
+	return 0;
+}
+
+
+############################################# PUSH POP PEAK in STACK Overflow #################################
+#include<stdio.h>
+#include<stdlib.h>
+
+// Declare linked list node
+
+struct Node
+{
+	int data;
+	struct Node* link;
+};
+
+struct Node* top;
+
+// Utility function to add an element
+// data in the stack insert at the beginning
+void push(int data)
+{
+	
+	// Create new node temp and allocate memory in heap
+	struct Node* temp = (struct Node*) malloc(sizeof(struct Node));
+
+	// Check if stack (heap) is full.
+	// Then inserting an element would
+	// lead to stack overflow
+	if (!temp)
+	{
+		printf("\nStack Overflow");
+		exit(1);
+	}
+
+	// Initialize data into temp data field
+	temp->data = data;
+
+	// Put top pointer reference into temp link
+	temp->link = top;
+
+	// Make temp as top of Stack
+	top = temp;
+}
+
+// Utility function to check if
+// the stack is empty or not
+int isEmpty()
+{
+	//If top is NULL it means that
+	//there are no elements are in stack
+	return top == NULL;
+}
+
+// Utility function to return top element in a stack
+int peek()
+{
+	
+	// If stack is not empty , return the top element
+	if (!isEmpty())
+		return top->data;
+	else
+		exit(1);
+}
+
+// Utility function to pop top
+// element from the stack
+void pop()
+{
+	struct Node* temp;
+
+	// Check for stack underflow
+	if (top == NULL)
+	{
+		printf("\nStack Underflow");
+		exit(1);
+	}
+	else
+	{
+		
+		// Assign top to temp
+		temp = top;
+
+		// Assign second node to top
+		top = top->link;
+
+		//This will automatically destroy
+		//the link between first node and second node
+
+		// Release memory of top node
+		//i.e delete the node
+		free(temp);
+	}
+}
+
+// Function to print all the
+// elements of the stack
+void display()
+{
+	struct Node* temp;
+
+	// Check for stack underflow
+	if (top == NULL)
+	{
+		printf("\nStack Underflow");
+		exit(1);
+	}
+	else
+	{
+		temp = top;
+		while (temp != NULL)
+		{
+
+			// Print node data
+			printf("%d-->",temp->data);
+
+			// Assign temp link to temp
+			temp = temp->link;
+		}
+	}
+}
+
+// Driver Code
+int main()
+{
+	
+	// Push the elements of stack
+	push(11);
+	push(22);
+	push(33);
+	push(44);
+
+	// Display stack elements
+	display();
+
+	// Print top element of stack
+	printf("\nTop element is %d \n",peek());
+
+	// Delete top elements of stack
+	pop();
+	pop();
+
+	// Display stack elements
+	display();
+
+	// Print top element of stack
+	printf("\nTop element is %d",peek());
+		 
+		
+	return 0;
+}
+############################################################# String character occarence ************************
+INPUT: aabbbaacccbbdddee
+OUTPUT: 4a5b3c3d2e
+#include <stdio.h>
+
+void strfun(char *ptr,int len)
+{
+printf("The given string %d\n",len);
+int count =0;
+char s='z';
+for(int j=0;j<len;j++)
+{
+char c = ptr[j];
+count = 0;
+for(int i=0;i<len;i++)
+{
+if(ptr[i]==c && ptr[i] != s)//aabbbaacccbbdddee
+{
+    count++;
+}
+}
+s=c;
+if(count >1)
+printf("Repeated string count %c == %d\n",s,count);
+}
+}
+int main()
+{
+char str[12]="abbaaabbbcc";
+int size=(sizeof(str)/sizeof(str[0]));
+strfun(str,size);
+return 0;
+}
+
+return 0;
+}
+
+###################### middlr node *****************
+// C program to find middle of linked list
+#include<stdio.h>
+#include<stdlib.h>
+
+/* Link list node */
+struct Node
+{
+	int data;
+	struct Node* next;
+};
+
+/* Function to get the middle of the linked list*/
+void printMiddle(struct Node *head)
+{
+	struct Node *slow_ptr = head;
+	struct Node *fast_ptr = head;
+
+	if (head!=NULL)
+	{
+		while (fast_ptr != NULL && fast_ptr->next != NULL)
+		{
+			fast_ptr = fast_ptr->next->next;
+			slow_ptr = slow_ptr->next;
+		}
+		printf("The middle element is [%d]\n\n", slow_ptr->data);
+	}
+}
+
+void push(struct Node** head_ref, int new_data)
+{
+	/* allocate node */
+	struct Node* new_node =
+		(struct Node*) malloc(sizeof(struct Node));
+
+	/* put in the data */
+	new_node->data = new_data;
+
+	/* link the old list off the new node */
+	new_node->next = (*head_ref);
+
+	/* move the head to point to the new node */
+	(*head_ref) = new_node;
+}
+
+// A utility function to print a given linked list
+void printList(struct Node *ptr)
+{
+	while (ptr != NULL)
+	{
+		printf("%d->", ptr->data);
+		ptr = ptr->next;
+	}
+	printf("NULL\n");
+}
+
+/* Driver program to test above function*/
+int main()
+{
+	/* Start with the empty list */
+	struct Node* head = NULL;
+	int i;
+
+	for (i=5; i>0; i--)
+	{
+		push(&head, i);
+		printList(head);
+		printMiddle(head);
+	}
+
+	return 0;
+}
+
+
+
+
+
